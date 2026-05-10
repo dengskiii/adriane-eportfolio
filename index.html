@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adriane Y. De Guzman — Student ePortfolio 2026</title>
+  <meta name="description" content="Student ePortfolio of Adriane Y. De Guzman, BS Information Technology student at De La Salle Lipa." />
+
+  <!-- Google Fonts: Sora for display headings, Manrope for body, JetBrains Mono for accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       CSS VARIABLES — dark/navy theme with white alternating sections
+       ========================================================= */
+    :root {
+      /* Dark / navy palette */
+      --navy-900: #0a1628;       /* deepest navy background */
+      --navy-800: #0f1e36;       /* section background */
+      --navy-700: #142844;       /* card surface on dark */
+      --navy-600: #1c3358;       /* hover surface */
+      --navy-line: #1f3458;      /* subtle dividers on dark */
+
+      /* Light palette */
+      --white: #ffffff;
+      --off-white: #f7f9fc;
+      --light-line: #e6ecf3;
+
+      /* Text */
+      --text-on-dark: #e7eef7;
+      --text-muted-dark: #93a4bd;
+      --text-on-light: #0a1628;
+      --text-muted-light: #4b5b73;
+
+      /* Accent */
+      --accent: #38bdf8;          /* sky blue accent */
+      --accent-soft: #7dd3fc;     /* lighter accent */
+      --accent-glow: rgba(56, 189, 248, 0.18);
+
+      /* Typography */
+      --font-display: "Sora", system-ui, -apple-system, sans-serif;
+      --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      /* Spacing helpers */
+      --max-width: 1180px;
+      --section-py: clamp(72px, 10vw, 120px);
+
+      /* Shadows */
+      --shadow-card: 0 10px 30px -12px rgba(2, 12, 27, 0.4);
+      --shadow-light: 0 6px 24px -10px rgba(10, 22, 40, 0.12);
+    }
+
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* account for fixed nav */
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--navy-900);
+      color: var(--text-on-dark);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       UTILITY: container + section wrappers
+       ========================================================= */
+    .container {
+      max-width: var(--max-width);
+      margin-inline: auto;
+      padding-inline: clamp(20px, 5vw, 40px);
+    }
+
+    section {
+      padding-block: var(--section-py);
+      position: relative;
+    }
+
+    .section-light {
+      background: var(--white);
+      color: var(--text-on-light);
+    }
+
+    .section-light .muted { color: var(--text-muted-light); }
+    .muted { color: var(--text-muted-dark); }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(32px, 4.5vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      max-width: 720px;
+      margin-bottom: 56px;
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(10, 22, 40, 0.72);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--navy-line);
+      background: rgba(10, 22, 40, 0.9);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted-dark);
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-on-dark);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile burger */
+    .nav-burger {
+      display: none;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-burger span {
+      width: 22px;
+      height: 2px;
+      background: var(--text-on-dark);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      padding-top: 160px;
+      padding-bottom: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative gradient mesh background */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(125, 211, 252, 0.08) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fade-up 0.8s ease 0.1s forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(48px, 9vw, 104px);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fade-up 0.8s ease 0.2s forwards;
+    }
+
+    .hero-name .first { display: block; color: var(--text-on-dark); }
+    .hero-name .last  {
+      display: block;
+      background: linear-gradient(120deg, var(--accent) 0%, var(--accent-soft) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-muted-dark);
+      max-width: 560px;
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fade-up 0.8s ease 0.35s forwards;
+    }
+
+    .hero-tagline strong { color: var(--text-on-dark); font-weight: 600; }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 14px;
+      margin-bottom: 56px;
+      font-size: 14px;
+      color: var(--text-muted-dark);
+      opacity: 0;
+      animation: fade-up 0.8s ease 0.5s forwards;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-meta span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* Hero stat cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      opacity: 0;
+      animation: fade-up 0.8s ease 0.65s forwards;
+    }
+
+    .stat-card {
+      background: var(--navy-700);
+      border: 1px solid var(--navy-line);
+      border-radius: 14px;
+      padding: 22px 20px;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: var(--navy-600);
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted-dark);
+      line-height: 1.4;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+       ABOUT (white section)
+       ========================================================= */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-card {
+      background: var(--off-white);
+      border: 1px solid var(--light-line);
+      border-radius: 18px;
+      padding: 32px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .about-card-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted-light);
+      margin-bottom: 14px;
+    }
+
+    .about-card-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .about-card-role {
+      font-size: 15px;
+      color: var(--text-muted-light);
+      margin-bottom: 22px;
+    }
+
+    .about-card ul {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .about-card li {
+      font-size: 14px;
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      align-items: baseline;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--light-line);
+    }
+
+    .about-card li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .about-card li span:first-child {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted-light);
+    }
+
+    .about-text p {
+      font-size: 17px;
+      margin-bottom: 22px;
+      line-height: 1.75;
+    }
+
+    /* =========================================================
+       SKILLS — progress bars
+       ========================================================= */
+    .skills-section { background: var(--off-white); color: var(--text-on-light); }
+    .skills-section .muted { color: var(--text-muted-light); }
+    .skills-section .section-eyebrow { color: #0284c7; }
+    .skills-section .section-eyebrow::before { background: #0284c7; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px 56px;
+    }
+
+    .skill-row {
+      padding: 4px 0;
+    }
+
+    .skill-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .skill-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .skill-percent {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #0284c7;
+      font-weight: 500;
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+      border-radius: 999px;
+      width: 0;
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .skill-desc {
+      font-size: 13px;
+      color: var(--text-muted-light);
+      margin-top: 8px;
+    }
+
+    /* =========================================================
+       EDUCATION — timeline
+       ========================================================= */
+    .education-section {
+      background: var(--navy-800);
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 40px;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 22px 0 36px 28px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 28px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--navy-900);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .timeline-card {
+      background: var(--navy-700);
+      border: 1px solid var(--navy-line);
+      border-radius: 14px;
+      padding: 24px 28px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateX(6px);
+      border-color: var(--accent);
+    }
+
+    .timeline-year {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .timeline-school {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .timeline-degree {
+      font-size: 14px;
+      color: var(--accent-soft);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .timeline-desc {
+      font-size: 14.5px;
+      color: var(--text-muted-dark);
+      line-height: 1.65;
+    }
+
+    /* =========================================================
+       PROFESSIONAL SUMMARY — numbered training cards
+       ========================================================= */
+    .summary-section { background: var(--white); color: var(--text-on-light); }
+    .summary-section .muted { color: var(--text-muted-light); }
+    .summary-section .section-eyebrow { color: #0284c7; }
+    .summary-section .section-eyebrow::before { background: #0284c7; }
+
+    .summary-intro {
+      font-size: 17px;
+      max-width: 820px;
+      line-height: 1.75;
+      color: var(--text-muted-light);
+      margin-bottom: 64px;
+    }
+
+    .training-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .training-card {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 32px;
+      align-items: start;
+      padding: 36px 0;
+      border-top: 1px solid var(--light-line);
+      transition: padding-left 0.3s ease;
+    }
+
+    .training-card:hover { padding-left: 12px; }
+    .training-card:last-child { border-bottom: 1px solid var(--light-line); }
+
+    .training-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 56px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--light-line);
+      transition: color 0.3s ease;
+    }
+
+    .training-card:hover .training-num { color: var(--accent); }
+
+    .training-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .training-subtitle {
+      font-size: 13px;
+      color: #0284c7;
+      font-weight: 500;
+      margin-bottom: 14px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    .training-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .training-meta span {
+      font-size: 12px;
+      padding: 5px 12px;
+      background: var(--off-white);
+      border: 1px solid var(--light-line);
+      border-radius: 999px;
+      color: var(--text-muted-light);
+    }
+
+    .training-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted-light);
+      margin-bottom: 18px;
+    }
+
+    .training-takeaways {
+      background: var(--off-white);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .training-takeaways h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #0284c7;
+      margin-bottom: 10px;
+    }
+
+    .training-takeaways ul {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .training-takeaways li {
+      font-size: 14px;
+      color: var(--text-on-light);
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .training-takeaways li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       SKILLS GAINED — badges
+       ========================================================= */
+    .badges-section {
+      background: var(--navy-800);
+    }
+
+    .badges-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .badge {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--navy-700);
+      border: 1px solid var(--navy-line);
+      font-size: 14px;
+      color: var(--text-on-dark);
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+
+    .badge:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--navy-900);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       CERTIFICATES — gallery
+       ========================================================= */
+    .certs-section { background: var(--white); color: var(--text-on-light); }
+    .certs-section .muted { color: var(--text-muted-light); }
+    .certs-section .section-eyebrow { color: #0284c7; }
+    .certs-section .section-eyebrow::before { background: #0284c7; }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .cert-card {
+      background: var(--white);
+      border: 1px solid var(--light-line);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-light);
+      border-color: var(--accent);
+    }
+
+    .cert-img-wrap {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--off-white);
+      border-bottom: 1px solid var(--light-line);
+      position: relative;
+    }
+
+    .cert-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .cert-card:hover img { transform: scale(1.04); }
+
+    .cert-info { padding: 22px 24px; }
+
+    .cert-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .cert-meta {
+      font-size: 13px;
+      color: var(--text-muted-light);
+    }
+
+    /* =========================================================
+       CERTIFICATE LIGHTBOX
+       ========================================================= */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+
+    .lightbox.show { display: flex; }
+
+    .lightbox img {
+      max-width: 95%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* =========================================================
+       CONTACT
+       ========================================================= */
+    .contact-section {
+      background: var(--navy-900);
+      text-align: center;
+      padding-block: clamp(80px, 12vw, 140px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .contact-inner { position: relative; z-index: 1; }
+
+    .contact-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 18px;
+    }
+
+    .contact-text {
+      font-size: 17px;
+      color: var(--text-muted-dark);
+      max-width: 620px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: var(--navy-900);
+      border-radius: 999px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 16px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      margin-bottom: 56px;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .contact-info-item {
+      background: var(--navy-700);
+      border: 1px solid var(--navy-line);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .contact-info-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .contact-info-val {
+      font-size: 14px;
+      color: var(--text-on-dark);
+      word-break: break-all;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--navy-line);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted-dark);
+      background: var(--navy-900);
+    }
+
+    footer span { color: var(--accent); }
+
+    /* =========================================================
+       SCROLL REVEAL ANIMATIONS
+       ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 880px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+
+      .nav.open .nav-links {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--navy-900);
+        border-bottom: 1px solid var(--navy-line);
+        padding: 20px 24px 28px;
+        gap: 18px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-card { position: static; }
+
+      .training-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .training-num { font-size: 44px; }
+    }
+
+    @media (max-width: 540px) {
+      .hero { padding-top: 130px; }
+      .hero-name { font-size: clamp(44px, 14vw, 64px); }
+      .stat-card { padding: 18px; }
+      .timeline { padding-left: 22px; }
+      .timeline-card { padding: 20px; }
+    }
+
+    /* Selection styling */
+    ::selection {
+      background: var(--accent);
+      color: var(--navy-900);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====================================================
+       NAVIGATION BAR (fixed, glass-blur, smooth-scroll)
+       ==================================================== -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="nav-brand">
+        <span class="nav-brand-dot"></span>
+        Adriane <span style="color: var(--text-muted-dark); font-weight: 500;">/ ePortfolio</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-burger" id="nav-burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====================================================
+       HERO SECTION
+       ==================================================== -->
+  <header class="hero" id="top">
+    <div class="container hero-inner">
+      <div class="hero-eyebrow">Student ePortfolio · 2026</div>
+
+      <h1 class="hero-name">
+        <span class="first">Adriane Y.</span>
+        <span class="last">De Guzman</span>
+      </h1>
+
+      <p class="hero-tagline">
+        <strong>BS Information Technology</strong> student at De La Salle Lipa.
+        Aspiring IT Professional focused on Networking Security & Technical Support.
+      </p>
+
+      <div class="hero-meta">
+        <span>De La Salle Lipa</span>
+        <span>2022 — 2026</span>
+        <span>Lipa, Batangas</span>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">2022—26</div>
+          <div class="stat-label">BSIT Program</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Certificates Earned</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">80+</div>
+          <div class="stat-label">Learning Modules Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">14</div>
+          <div class="stat-label">IT Skills Developed</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================
+       ABOUT ME SECTION
+       ==================================================== -->
+  <section class="section-light" id="about">
+    <div class="container">
+      <div class="section-eyebrow">A little background</div>
+      <h2 class="section-title">About Me</h2>
+
+      <div class="about-grid">
+        <!-- Left: identity card -->
+        <aside class="about-card reveal">
+          <div class="about-card-label">Profile</div>
+          <h3 class="about-card-name">Adriane Y. De Guzman</h3>
+          <p class="about-card-role">Aspiring IT Professional</p>
+          <ul>
+            <li><span>Program</span><span>BS Information Technology</span></li>
+            <li><span>School</span><span>De La Salle Lipa</span></li>
+            <li><span>Years</span><span>2022 — 2026</span></li>
+            <li><span>Focus</span><span>Networking Security · Tech Support</span></li>
+            <li><span>Location</span><span>Lipa, Batangas, PH</span></li>
+          </ul>
+        </aside>
+
+        <!-- Right: long-form intro -->
+        <div class="about-text reveal">
+          <p>
+            Hello! I am Adriane Y. De Guzman, a Bachelor of Science in Information Technology
+            student from De La Salle Lipa. I have a growing interest in technology, networking
+            security, technical troubleshooting, and customer support. As an IT student, I continuously
+            aim to strengthen both my technical and professional skills through academic learning,
+            seminars, and hands-on experiences.
+          </p>
+          <p>
+            I am motivated to learn more about digital systems, cybersecurity, cloud computing, and
+            workplace technologies. Through my trainings and certifications, I have developed a better
+            understanding of how technology supports communication, productivity, security, and
+            innovation in different fields.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       CORE SKILLS — animated progress bars
+       ==================================================== -->
+  <section class="skills-section">
+    <div class="container">
+      <div class="section-eyebrow">What I bring to the table</div>
+      <h2 class="section-title">Core Skills</h2>
+      <p class="section-sub muted">
+        Technical and professional competencies developed through coursework, seminars, and self-directed learning.
+      </p>
+
+      <div class="skills-grid" id="skills-grid">
+        <!-- Each skill row uses data-percent for the animated fill -->
+        <div class="skill-row reveal">
+          <div class="skill-head">
+            <span class="skill-name">Networking Security</span>
+            <span class="skill-percent">88%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-percent="88"></div></div>
+          <p class="skill-desc">Understanding of secure network design, threat awareness, and digital identity systems.</p>
+        </div>
+
+        <div class="skill-row reveal">
+          <div class="skill-head">
+            <span class="skill-name">Technical Troubleshooting</span>
+            <span class="skill-percent">86%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-percent="86"></div></div>
+          <p class="skill-desc">Methodical approach to diagnosing and resolving hardware and software issues.</p>
+        </div>
+
+        <div class="skill-row reveal">
+          <div class="skill-head">
+            <span class="skill-name">Customer Support</span>
+            <span class="skill-percent">84%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-percent="84"></div></div>
+          <p class="skill-desc">Empathetic communication and problem resolution in user-facing IT environments.</p>
+        </div>
+
+        <div class="skill-row reveal">
+          <div class="skill-head">
+            <span class="skill-name">Critical Thinking</span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-percent="85"></div></div>
+          <p class="skill-desc">Analytical reasoning honed through coursework, research seminars, and case-based learning.</p>
+        </div>
+
+        <div class="skill-row reveal">
+          <div class="skill-head">
+            <span class="skill-name">Communication & Adaptability</span>
+            <span class="skill-percent">82%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-percent="82"></div></div>
+          <p class="skill-desc">Clear written and verbal communication; ability to learn and adjust in new technical environments.</p>
+        </div>
+
+        <div class="skill-row reveal">
+          <div class="skill-head">
+            <span class="skill-name">Digital Literacy & AI Awareness</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-percent="80"></div></div>
+          <p class="skill-desc">Foundational knowledge of generative AI, cloud platforms, and modern digital tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       ACADEMIC BACKGROUND — timeline
+       ==================================================== -->
+  <section class="education-section" id="education">
+    <div class="container">
+      <div class="section-eyebrow">Education</div>
+      <h2 class="section-title">Academic Background</h2>
+      <p class="section-sub muted">A timeline of formal learning that shaped my foundation.</p>
+
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <div class="timeline-card">
+            <div class="timeline-year">2011 — 2016</div>
+            <h3 class="timeline-school">Canossa Academy</h3>
+            <div class="timeline-degree">Elementary Education</div>
+            <p class="timeline-desc">
+              Completed elementary education with an early academic foundation in core subjects,
+              discipline, and curiosity for learning.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal">
+          <div class="timeline-card">
+            <div class="timeline-year">2017 — 2022</div>
+            <h3 class="timeline-school">Canossa Academy</h3>
+            <div class="timeline-degree">Junior &amp; Senior High School</div>
+            <p class="timeline-desc">
+              Completed junior and senior high school education, developing discipline, communication,
+              and academic readiness for higher education.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item reveal">
+          <div class="timeline-card">
+            <div class="timeline-year">2022 — 2026</div>
+            <h3 class="timeline-school">De La Salle Lipa</h3>
+            <div class="timeline-degree">Bachelor of Science in Information Technology</div>
+            <p class="timeline-desc">
+              Currently pursuing an IT degree focused on technology, digital systems, networking,
+              and professional development — preparing to enter the IT industry as a competent,
+              well-rounded graduate.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       PROFESSIONAL SUMMARY — training cards
+       ==================================================== -->
+  <section class="summary-section" id="summary">
+    <div class="container">
+      <div class="section-eyebrow">Seminars, Trainings &amp; What I Learned</div>
+      <h2 class="section-title">Professional Summary</h2>
+
+      <p class="summary-intro">
+        Throughout my academic journey, I have participated in seminars, trainings, and certification
+        programs that helped me improve my technical knowledge, career readiness, and personal development.
+        These experiences allowed me to explore areas such as cybersecurity, cloud computing, artificial
+        intelligence, research, digital tools, problem-solving, and IT career planning.
+      </p>
+
+      <div class="training-grid">
+        <!-- Training 01: PNPKI -->
+        <article class="training-card reveal">
+          <div class="training-num">01</div>
+          <div>
+            <h3 class="training-title">Information Session: PNPKI for SUCs, LUCs, &amp; GOCCs</h3>
+            <div class="training-subtitle">Digital Identity &amp; Cybersecurity Awareness</div>
+            <div class="training-meta">
+              <span>📅 April 15, 2026</span>
+              <span>🏛 DICT CALABARZON Regional Office</span>
+            </div>
+            <p class="training-desc">
+              This information session introduced the importance of PNPKI in supporting secure digital
+              transactions, authentication, and trust in online government and institutional systems.
+            </p>
+            <div class="training-takeaways">
+              <h4>Key Takeaways</h4>
+              <ul>
+                <li>Importance of digital identity</li>
+                <li>Secure online transactions</li>
+                <li>Authentication and digital certificates</li>
+                <li>Cybersecurity awareness in public institutions</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Training 02: Skills to Succeed -->
+        <article class="training-card reveal">
+          <div class="training-num">02</div>
+          <div>
+            <h3 class="training-title">Skills to Succeed Academy</h3>
+            <div class="training-subtitle">Career Readiness &amp; Future Skills Development</div>
+            <div class="training-meta">
+              <span>📅 April 12, 2026</span>
+              <span>🎯 Accenture S2S Academy</span>
+              <span>🏆 80 Modules Completed</span>
+            </div>
+            <p class="training-desc">
+              This training helped me build future-ready skills for employment, workplace communication,
+              technology use, and personal development. It covered topics such as generative AI, emotional
+              intelligence, lifelong learning, problem-solving, coding, data, and technology at work.
+            </p>
+            <div class="training-takeaways">
+              <h4>Key Takeaways</h4>
+              <ul>
+                <li>Career readiness and workplace skills</li>
+                <li>Generative AI fundamentals</li>
+                <li>Critical thinking and problem-solving</li>
+                <li>Emotional intelligence and communication</li>
+                <li>Coding and data fundamentals</li>
+                <li>Lifelong learning and growth mindset</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Training 03: Innovative Research -->
+        <article class="training-card reveal">
+          <div class="training-num">03</div>
+          <div>
+            <h3 class="training-title">Innovative Research Horizons Seminar</h3>
+            <div class="training-subtitle">Innovation, Research &amp; Academic Growth</div>
+            <div class="training-meta">
+              <span>📅 February 3, 2026</span>
+              <span>📍 CBEAM Function Hall</span>
+            </div>
+            <p class="training-desc">
+              This seminar provided insights into research development, innovation, and the importance
+              of exploring new ideas that can contribute to academic and professional growth.
+            </p>
+            <div class="training-takeaways">
+              <h4>Key Takeaways</h4>
+              <ul>
+                <li>Importance of research and innovation</li>
+                <li>Developing academic curiosity</li>
+                <li>Exploring new ideas and technologies</li>
+                <li>Applying research thinking in real-world problems</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Training 04: DevRoutes -->
+        <article class="training-card reveal">
+          <div class="training-num">04</div>
+          <div>
+            <h3 class="training-title">DevRoutes: Learning How to Learn with Roadmaps</h3>
+            <div class="training-subtitle">IT Career Roadmaps &amp; Learning Strategies</div>
+            <div class="training-meta">
+              <span>📅 January 29, 2026</span>
+              <span>📍 MB Auditorium, De La Salle Lipa</span>
+              <span>🎓 JPCS — De La Salle Chapter</span>
+            </div>
+            <p class="training-desc">
+              This seminar helped me understand how structured learning roadmaps can guide students
+              in developing technical skills and preparing for future IT career paths.
+            </p>
+            <div class="training-takeaways">
+              <h4>Key Takeaways</h4>
+              <ul>
+                <li>Creating a structured learning plan</li>
+                <li>Understanding IT career pathways</li>
+                <li>Improving self-directed learning</li>
+                <li>Building consistency in skill development</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Training 05: AWS -->
+        <article class="training-card reveal">
+          <div class="training-num">05</div>
+          <div>
+            <h3 class="training-title">From Zero to Cloud: An Introduction to AWS</h3>
+            <div class="training-subtitle">Cloud Computing Fundamentals</div>
+            <div class="training-meta">
+              <span>📅 April 21, 2026</span>
+              <span>⏰ 9:00 AM — 12:00 PM</span>
+              <span>💻 Virtual Instructor-Led Training</span>
+              <span>🏢 Trainocate</span>
+            </div>
+            <p class="training-desc">
+              This training introduced the basic concepts of cloud computing and Amazon Web Services.
+              It helped me understand how cloud platforms support storage, computing, scalability,
+              and digital transformation.
+            </p>
+            <div class="training-takeaways">
+              <h4>Key Takeaways</h4>
+              <ul>
+                <li>Basic cloud computing concepts</li>
+                <li>Introduction to AWS</li>
+                <li>Cloud storage and computing services</li>
+                <li>Scalability and digital transformation</li>
+                <li>Importance of cloud skills in the IT industry</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       SKILLS GAINED — badges
+       ==================================================== -->
+  <section class="badges-section">
+    <div class="container">
+      <div class="section-eyebrow">Skills gained from all seminars</div>
+      <h2 class="section-title">Acquired Competencies</h2>
+      <p class="section-sub muted">A consolidated view of skills developed across every training and seminar attended.</p>
+
+      <div class="badges-grid">
+        <span class="badge">Problem-solving</span>
+        <span class="badge">Critical thinking</span>
+        <span class="badge">Cybersecurity awareness</span>
+        <span class="badge">Cloud computing basics</span>
+        <span class="badge">Digital identity</span>
+        <span class="badge">Communication</span>
+        <span class="badge">Customer support</span>
+        <span class="badge">Technical troubleshooting</span>
+        <span class="badge">AI awareness</span>
+        <span class="badge">Coding fundamentals</span>
+        <span class="badge">Data interpretation</span>
+        <span class="badge">Career planning</span>
+        <span class="badge">Lifelong learning</span>
+        <span class="badge">Adaptability</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       CERTIFICATES — gallery with lightbox
+       ==================================================== -->
+  <section class="certs-section" id="certificates">
+    <div class="container">
+      <div class="section-eyebrow">Proof of Learning</div>
+      <h2 class="section-title">Seminar &amp; Training Certificates</h2>
+      <p class="section-sub muted">Click any certificate to view it in full size.</p>
+
+      <div class="certs-grid">
+        <article class="cert-card" data-cert="certificates/certificate1.jpg">
+          <div class="cert-img-wrap">
+            <img src="certificates/certificate1.jpg" alt="PNPKI Information Session 2026 Certificate" loading="lazy" />
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-title">PNPKI Information Session 2026</h3>
+            <p class="cert-meta">DICT CALABARZON · April 15, 2026</p>
+          </div>
+        </article>
+
+        <article class="cert-card" data-cert="certificates/certificate2.jpg">
+          <div class="cert-img-wrap">
+            <img src="certificates/certificate2.jpg" alt="Skills to Succeed Academy Certificate" loading="lazy" />
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-title">Skills to Succeed Academy</h3>
+            <p class="cert-meta">Accenture · April 12, 2026</p>
+          </div>
+        </article>
+
+        <article class="cert-card" data-cert="certificates/certificate3.jpg">
+          <div class="cert-img-wrap">
+            <img src="certificates/certificate3.jpg" alt="Innovative Research Horizons 2026 Certificate" loading="lazy" />
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-title">Innovative Research Horizons 2026</h3>
+            <p class="cert-meta">DLSL · February 3, 2026</p>
+          </div>
+        </article>
+
+        <article class="cert-card" data-cert="certificates/certificate4.jpg">
+          <div class="cert-img-wrap">
+            <img src="certificates/certificate4.jpg" alt="DevRoutes Learning How to Learn Certificate" loading="lazy" />
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-title">DevRoutes: Learning How to Learn</h3>
+            <p class="cert-meta">JPCS — DLSL Chapter · January 29, 2026</p>
+          </div>
+        </article>
+
+        <article class="cert-card" data-cert="certificates/certificate5.jpg">
+          <div class="cert-img-wrap">
+            <img src="certificates/certificate5.jpg" alt="Trainocate AWS From Zero to Cloud Certificate" loading="lazy" />
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-title">From Zero to Cloud — AWS</h3>
+            <p class="cert-meta">Trainocate · April 21, 2026</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
+    <img id="lightbox-img" src="" alt="Certificate full view" />
+  </div>
+
+  <!-- ====================================================
+       CONTACT
+       ==================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-inner">
+      <div class="section-eyebrow" style="justify-content: center;">Let's connect</div>
+      <h2 class="contact-title">Get in Touch</h2>
+      <p class="contact-text">
+        Whether you are a potential employer, fellow IT student, or someone interested in technology,
+        I would be glad to connect and share more about my academic and professional journey.
+      </p>
+
+      <a href="mailto:adriane_deguzman@dlsl.edu.ph" class="contact-button">
+        ✉ Send me an email
+      </a>
+
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-info-label">Email</div>
+          <div class="contact-info-val">adriane_deguzman@dlsl.edu.ph</div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">School</div>
+          <div class="contact-info-val">De La Salle Lipa</div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Program</div>
+          <div class="contact-info-val">BS Information Technology</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       FOOTER
+       ==================================================== -->
+  <footer>
+    <div class="container">
+      Adriane Y. De Guzman <span>©</span> 2026 · Student ePortfolio
+    </div>
+  </footer>
+
+  <!-- ====================================================
+       JAVASCRIPT — interactions, scroll effects, animations
+       ==================================================== -->
+  <script>
+    /* -------------------------------------------------------
+       1. Sticky nav: add .scrolled class once page scrolls
+       ------------------------------------------------------- */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    /* -------------------------------------------------------
+       2. Mobile burger menu toggle
+       ------------------------------------------------------- */
+    const burger = document.getElementById('nav-burger');
+    burger.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      burger.classList.toggle('open');
+    });
+
+    // Close mobile menu after clicking any nav link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        burger.classList.remove('open');
+      });
+    });
+
+    /* -------------------------------------------------------
+       3. Scroll-reveal: fade elements in as they enter view.
+          Skill bars also animate their fill width once revealed.
+       ------------------------------------------------------- */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // If this is a skill row, animate its fill bar
+          const fill = entry.target.querySelector('.skill-fill');
+          if (fill) {
+            const pct = fill.getAttribute('data-percent');
+            // small delay so the bar visibly grows
+            setTimeout(() => { fill.style.width = pct + '%'; }, 150);
+          }
+
+          observer.unobserve(entry.target); // animate only once
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* -------------------------------------------------------
+       4. Certificate lightbox: click a cert to open full image
+       ------------------------------------------------------- */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.cert-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const src = card.getAttribute('data-cert');
+        lightboxImg.src = src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    lightbox.addEventListener('click', closeLightbox);
+    lightboxClose.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    /* -------------------------------------------------------
+       5. Smooth-active section highlighting in nav
+       ------------------------------------------------------- */
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        if (window.scrollY >= top) currentId = sec.id;
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + currentId
+          ? 'var(--text-on-dark)'
+          : '';
+      });
+    });
+  </script>
+</body>
+</html>
